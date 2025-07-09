@@ -9,7 +9,6 @@ import {
   Message,
   Image,
   Container,
-  Responsive,
 } from 'semantic-ui-react';
 
 const History = () => {
@@ -30,20 +29,14 @@ const History = () => {
   };
 
   const handleSubmit = () => {
-    if (!name || !phone || !itemName || !image) {
-      alert('Please fill all fields and upload an image.');
-      return;
-    }
-
-    setLoading(true);
-
     const message = `Hello, I want to sell an item.
-Name: ${name}
-Phone: ${phone}
-Item: ${itemName}`;
+Name: ${name || 'N/A'}
+Phone: ${phone || 'N/A'}
+Item: ${itemName || 'N/A'}`;
 
     const whatsappLink = `https://wa.me/917337590401?text=${encodeURIComponent(message)}`;
 
+    setLoading(true);
     setTimeout(() => {
       setLoading(false);
       setSuccessMessage('Details sent successfully! We will contact you soon.');
@@ -70,7 +63,6 @@ Item: ${itemName}`;
               placeholder="Enter your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
             />
 
             <Form.Input
@@ -78,7 +70,6 @@ Item: ${itemName}`;
               placeholder="Enter your phone number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              required
             />
 
             <Form.Input
@@ -86,7 +77,6 @@ Item: ${itemName}`;
               placeholder="Enter the name of the item"
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
-              required
             />
 
             <Form.Field>
